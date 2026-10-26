@@ -1,0 +1,24 @@
+
+[
+  {
+    "id": 1,
+    "patient_name": "Sample Patient One",
+    "department": "General Medicine",
+    "appointment_date": "2026-11-02",
+    "reason": "Routine checkup"
+  },
+  {
+    "id": 2,
+    "patient_name": "Sample Patient Two",
+    "department": "Cardiology",
+    "appointment_date": "2026-11-03",
+    "reason": "Routine consultation"
+  },
+  {
+    "id": 3,
+    "patient_name": "Sample Patient Three",
+    "department": "Orthopedics",
+    "appointment_date": "2026-11-04",
+    "reason": "Joint pain consultation"
+  }
+]
