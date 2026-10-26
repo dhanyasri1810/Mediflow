@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | MediFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>MediFlow</h1>
+        <p>Hospital Appointment Booking</p>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Book an Appointment</h2>
+
+            <form id="bookingForm">
+                <p>
+                    <label for="patientName">Patient Name</label><br>
+                    <input id="patientName" name="patientName"
+                           type="text" required>
+                </p>
+
+                <p>
+                    <label for="department">Department</label><br>
+                    <select id="department" name="department" required>
+                        <option value="">Select a department</option>
+                        <option>General Medicine</option>
+                        <option>Cardiology</option>
+                        <option>Orthopedics</option>
+                        <option>Dermatology</option>
+                        <option>Pediatrics</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="appointmentDate">Appointment Date</label><br>
+                    <input id="appointmentDate" name="appointmentDate"
+                           type="date" required>
+                </p>
+
+                <p>
+                    <label for="reason">Reason for Visit</label><br>
+                    <textarea id="reason" name="reason"
+                              rows="3" required></textarea>
+                </p>
+
+                <button type="submit">Book Appointment</button>
+            </form>
+
+            <p id="message" role="status"></p>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById("bookingForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("message").textContent =
+                "Form completed! Backend booking integration is coming next.";
+        });
+    </script>
+</body>
+</html>
