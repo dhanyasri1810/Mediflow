@@ -1,55 +1,91 @@
+
 # MediFlow 🏥
+### Hospital Appointment Management System
 
-### Hospital Appointment Booking and Patient History Management System
+MediFlow is a beginner-friendly, open-source project designed to simplify hospital appointment booking through a web interface and Python backend.
 
-## About the Project
-MediFlow is a healthcare management application designed to simplify hospital appointment booking and patient history management. It aims to reduce waiting time, organize appointments, and help doctors access relevant patient records efficiently.
-
-## Problem Statement
-Hospitals may face challenges managing appointments, patient records, and waiting times using manual processes. MediFlow aims to provide a centralized digital solution to improve appointment organization and patient record accessibility.
-
-## Key Features
-- Patient registration
-- Hospital appointment booking
-- Doctor appointment dashboard
-- Patient history management
-- Appointment status tracking
+## Features
+- Book hospital appointments
+- Select a medical department
+- Enter appointment date and reason for visit
+- Store appointment details using SQLite
+- View saved appointments through the backend API
 
 ## Technology Stack
 - Frontend: HTML, CSS, JavaScript
-- Backend: Python with Flask
+- Backend: Python, Flask
 - Database: SQLite
-
-## Project Architecture
-MediFlow follows a simple three-layer architecture:
-1. Frontend – User interface for patients and doctors.
-2. Backend – Handles appointment requests and application logic.
-3. Database – Stores appointment details and patient records.
 
 ## Project Structure
 ```text
 MediFlow/
-├── frontend/
-├── backend/
-├── docs/
-├── sample-data/
-├── tests/
 ├── README.md
 ├── LICENSE
-└── .gitignore
+├── requirements.txt
+├── backend/
+│   └── app.py
+└── frontend/
+    ├── index.html
+    ├── style.css
+    └── booking.html
 ```
 
-## Getting Started
-Setup instructions will be provided here as the application development progresses.
+## Setup Instructions
+
+### 1. Install Python
+Install Python 3.10 or later.
+
+### 2. Install dependencies
+Open a terminal in the project root and run:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Start the backend
+Run:
+
+```bash
+python backend/app.py
+```
+
+The Flask server runs at `http://127.0.0.1:5000`.
+
+### 4. Open the frontend
+Open `frontend/index.html` in a browser.
+
+The booking form sends requests to the local backend. Keep the backend running while using the form.
+
+## API Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/` | Check backend status |
+| POST | `/appointments` | Book an appointment |
+| GET | `/appointments` | View saved appointments |
+
+## Database
+SQLite stores appointment details in a local database file created by the backend.
 
 ## Testing
-Test cases will cover patient registration, appointment booking, input validation, and patient history access.
+Test the backend status endpoint, submit an appointment with all required fields, check that missing fields are rejected, and verify saved appointments using the GET endpoint.
 
-## Sample Data
-The project will use fictional sample data for demonstration and testing. No real patient information should be included.
+These tests must be run locally before the project can be considered verified.
 
-## Open-Source License
-This project is intended to be released under the MIT License.
+## Limitations
+- This is an educational prototype, not a production hospital system.
+- Patient authentication and access control are not implemented.
+- Patient information is not suitable for real clinical use.
+- The frontend and backend integration requires local testing.
 
-## Project Status
-Currently under development.
+## Future Improvements
+- Patient registration and login
+- Appointment management
+- Patient history management
+- Secure authentication and data protection
+
+## License
+Distributed under the MIT License. See [LICENSE](LICENSE).
+
+## Status
+Under development.
