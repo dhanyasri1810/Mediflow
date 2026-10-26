@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Appointment | MediFlow</title>
+    <title>MediFlow - Book Appointment</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>MediFlow</h1>
-        <p>Hospital Appointment Booking</p>
+        <p>Your healthcare, organized.</p>
     </header>
 
     <main>
@@ -18,48 +18,68 @@
             <h2>Book an Appointment</h2>
 
             <form id="bookingForm">
-                <p>
-                    <label for="patientName">Patient Name</label><br>
-                    <input id="patientName" name="patientName"
-                           type="text" required>
-                </p>
+                <label for="patient_name">Patient Name</label>
+                <input type="text" id="patient_name" required>
 
-                <p>
-                    <label for="department">Department</label><br>
-                    <select id="department" name="department" required>
-                        <option value="">Select a department</option>
-                        <option>General Medicine</option>
-                        <option>Cardiology</option>
-                        <option>Orthopedics</option>
-                        <option>Dermatology</option>
-                        <option>Pediatrics</option>
-                    </select>
-                </p>
+                <label for="department">Department</label>
+                <select id="department" required>
+                    <option value="">Select Department</option>
+                    <option value="General Medicine">General Medicine</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                </select>
 
-                <p>
-                    <label for="appointmentDate">Appointment Date</label><br>
-                    <input id="appointmentDate" name="appointmentDate"
-                           type="date" required>
-                </p>
+                <label for="appointment_date">Appointment Date</label>
+                <input type="date" id="appointment_date" required>
 
-                <p>
-                    <label for="reason">Reason for Visit</label><br>
-                    <textarea id="reason" name="reason"
-                              rows="3" required></textarea>
-                </p>
+                <label for="reason">Reason for Visit</label>
+                <textarea id="reason" required></textarea>
 
                 <button type="submit">Book Appointment</button>
             </form>
 
-            <p id="message" role="status"></p>
+            <p id="message"></p>
+            <p><a href="index.html">Back to Home</a></p>
         </section>
     </main>
 
     <script>
-        document.getElementById("bookingForm").addEventListener("submit", function(event) {
+        const form = document.getElementById("bookingForm");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", async function(event) {
             event.preventDefault();
-            document.getElementById("message").textContent =
-                "Form completed! Backend booking integration is coming next.";
+            message.textContent = "Submitting appointment...";
+
+            const appointment = {
+                patient_name: document.getElementById("patient_name").value.trim(),
+                department: document.getElementById("department").value,
+                appointment_date: document.getElementById("appointment_date").value,
+                reason: document.getElementById("reason").value.trim()
+            };
+
+            try {
+                const response = await fetch("http://127.0.0.1:5000/appointments", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(appointment)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || "Booking failed");
+                }
+
+                message.textContent = "Appointment booked successfully! ID: " + result.appointment_id;
+                form.reset();
+            } catch (error) {
+                message.textContent = "Could not connect to the backend. Please start the Python server and try again.";
+            }
         });
     </script>
 </body>
